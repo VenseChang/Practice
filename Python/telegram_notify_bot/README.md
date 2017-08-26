@@ -10,9 +10,13 @@
 ## Command
 ### /start
 > get info from the bot
+### /help
+> get command info
 ### /setNotify time things
 > Time's format:yyyy-MM-dd HH:mm  
 > Example：/setNotify 2017-08-27 12:00 favorite TV show
+### /get
+> Get all notify message in the conversation
 
 ## Table schema
 ```sql

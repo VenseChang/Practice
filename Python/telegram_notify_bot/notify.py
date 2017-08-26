@@ -6,15 +6,17 @@ from datetime import datetime
 from telepot.loop import MessageLoop
 from data import NOTIFY_BOT_TOKEN as TOKEN
 
-COMMAND  = '/start\n=> get bot infomation.\n\n'
-COMMAND += '/setNotify time things\n=> Time \' format ： yyyy-MM-dd HH:mm\n=> Example ： /setNotify 2017-08-27 12:00 have lunch'
+INDENTATION = '\t\t\t\t'
 
+COMMAND  = '/start\n{}=> get bot infomation.\n\n'.format(INDENTATION)
+COMMAND += '/help\n{}=> get command info.\n\n'.format(INDENTATION)
+COMMAND += '/setNotify time things\n{}=> Time\'s format ： yyyy-MM-dd HH:mm\n{}=> Example ： /setNotify 2017-08-27 12:00 have lunch\n\n'.format(INDENTATION, INDENTATION)
+COMMAND += '/get\n{}=> get all notify message in the conversation'.format(INDENTATION)
 def start(msg):
     chat_id = msg['chat']['id']
     out  = 'Welcome for use telegram notify bot.\n'
     out += 'You can use this bot to remember everything, and you can set a time to push a notify for you.\n\n'
     out += COMMAND+'\n\n'
-    out += '/help => get command infomation.'
     bot.sendMessage(chat_id, out)
 
 
@@ -56,12 +58,12 @@ def get_info(msg):
     values = cursor.fetchall()
     out=''
     if len(values)>0:
-        out += '-=-=-=-=-=-=-=-=-=-=-=-=-\n'
+        out += '-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=\n'
         for index, value in enumerate(values):
-            out += 'user : {}\nthing: {}\ntime : {}'.format(value[0], value[1], value[2])
+            out += 'user        : {}\nmessage     : {}\nnotify time : {}'.format(value[0], value[1], value[2])
             if index!=len(values):
                 out += '\n'
-            out += '-=-=-=-=-=-=-=-=-=-=-=-=-\n'
+            out += '-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=\n'
     else:
         out = 'Here isn\'t any record in the conversation.'
     cursor.close()
