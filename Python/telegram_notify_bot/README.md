@@ -5,6 +5,7 @@
 ## Use
 1. python  
 2. sqlite3
+3. [pip](requirements.txt)
 
 ## Command
 ### /start
