@@ -6,14 +6,16 @@ from datetime import datetime
 from telepot.loop import MessageLoop
 from data import NOTIFY_BOT_TOKEN as TOKEN
 
+COMMAND  = '/start\n=> get bot infomation.\n\n'
+COMMAND += '/setNotify time things\n=> Time \' format ： yyyy-MM-dd HH:mm\n=> Example ： /setNotify 2017-08-27 12:00 have lunch'
 
 def start(msg):
     chat_id = msg['chat']['id']
-    msg  = 'Welcome for use telegram notify bot.\n'
-    msg += 'You can use this bot to remember everything, and you can set a time to push a notify for you.\n\n'
-    msg += '/start\n=> get bot infomation.\n\n'
-    msg += '/setNotify time things\n=> to set the msg and the notify time\n=> Time \' format ： yyyy-MM-dd HH:mm\n=> Example ： /setNotify 2017-08-27 12:00 have lunch'
-    bot.sendMessage(chat_id, msg)
+    out  = 'Welcome for use telegram notify bot.\n'
+    out += 'You can use this bot to remember everything, and you can set a time to push a notify for you.\n\n'
+    out += COMMAND+'\n\n'
+    out += '/help => get command infomation.'
+    bot.sendMessage(chat_id, out)
 
 
 def set_notify(msgs):
@@ -39,12 +41,16 @@ def set_notify(msgs):
         bot.sendMessage(chat_id, 'Command\'format is Error.')
 
 
+def get_help(msg):
+    chat_id = msg['chat']['id']
+    bot.sendMessage(chat_id, COMMAND)
 
 def on_chat_message(jsons):
     msg  = jsons['text']
 
     {
         '/start':start,
+        '/help':get_help,
         '/setNotify':set_notify,
     }[msg.split(' ')[0]](jsons)
 
@@ -64,7 +70,7 @@ while 1:
     cursor.execute('select user_no,chat_id,msg from user where notify_time like ?', (times,))
     values = cursor.fetchall()
     for v in values:
-        bot.sendMessage(v[1], 'time\'up\n{}'.format(v[2]))
+        bot.sendMessage(v[1], 'Time which you set up is up\n{}'.format(v[2]))
         cursor.execute('delete from user where user_no = ?;',(v[0],))
         conn.commit()
     cursor.close()
