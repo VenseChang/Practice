@@ -60,7 +60,9 @@ def get_info(msg):
     if len(values)>0:
         out += '-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=\n'
         for index, value in enumerate(values):
-            out += 'user        : {}\nmessage     : {}\nnotify time : {}'.format(value[0], value[1], value[2])
+            out += 'user name  : {}\n'.format(value[0])
+            out += 'message     : {}\n'.format(value[1])
+            out += 'notify time : {}'.format(value[2])
             if index!=len(values):
                 out += '\n'
             out += '-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=\n'
