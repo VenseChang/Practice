@@ -4,7 +4,7 @@ import telepot
 from pprint import pprint
 from datetime import datetime
 from telepot.loop import MessageLoop
-from data import TOKEN
+from data import NOTIFY_BOT_TOKEN as TOKEN
 
 
 def start(msg):
@@ -30,8 +30,7 @@ def set_notify(msgs):
 
         conn = sqlite3.connect('db.sqlite3')
         cursor = conn.cursor()
-        insert = "INSERT INTO user('user_id', 'user_name', 'chat_id', 'msg', 'notify_time' ) VALUES ('{}', '{}', '{}', '{}', '{}')".format(user_id, user_name, chat_id, msg, notify_time)
-        cursor.execute(insert)
+        cursor.execute("INSERT INTO user('user_id', 'user_name', 'chat_id', 'msg', 'notify_time' ) VALUES (?, ?, ?, ?, ?)",(user_id, user_name, chat_id, msg, notify_time,))
         conn.commit()
         cursor.close()
         conn.close()
