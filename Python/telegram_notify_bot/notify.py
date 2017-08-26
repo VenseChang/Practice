@@ -24,26 +24,49 @@ def set_notify(msgs):
     user_id = msgs['from']['id']
     user_name = msgs['from']['first_name']
     msg_split_ary = msgs['text'].split(' ')
-    try:
-        notify_time = datetime.strptime(msg_split_ary[1] + ' ' + msg_split_ary[2] , '%Y-%m-%d %H:%M')
-        msg = ''
-        for t in msg_split_ary[3:]:
-            msg += t + ' '
-
-        conn = sqlite3.connect('db.sqlite3')
-        cursor = conn.cursor()
-        cursor.execute("INSERT INTO user('user_id', 'user_name', 'chat_id', 'msg', 'notify_time' ) VALUES (?, ?, ?, ?, ?)",(user_id, user_name, chat_id, msg, notify_time,))
-        conn.commit()
-        cursor.close()
-        conn.close()
-        bot.sendMessage(chat_id, 'Your notify setting already record.')
-    except ValueError:
-        bot.sendMessage(chat_id, 'Command\'format is Error.')
+    if len(msg_split_ary)<4:
+        bot.sendMessage(chat_id, 'Syntax Error.')
+    else:
+        try:
+            notify_time = datetime.strptime(msg_split_ary[1] + ' ' + msg_split_ary[2] , '%Y-%m-%d %H:%M')
+            msg = ''
+            for t in msg_split_ary[3:]:
+                msg += t + ' '
+            conn = sqlite3.connect('db.sqlite3')
+            cursor = conn.cursor()
+            cursor.execute("INSERT INTO user('user_id', 'user_name', 'chat_id', 'msg', 'notify_time' ) VALUES (?, ?, ?, ?, ?)",(user_id, user_name, chat_id, msg, notify_time,))
+            conn.commit()
+            cursor.close()
+            conn.close()
+            bot.sendMessage(chat_id, 'Your notify setting already record.')
+        except ValueError:
+            bot.sendMessage(chat_id, 'Syntax Error.')
 
 
 def get_help(msg):
     chat_id = msg['chat']['id']
     bot.sendMessage(chat_id, COMMAND)
+
+
+def get_info(msg):
+    chat_id = msg['chat']['id']
+    conn = sqlite3.connect('db.sqlite3')
+    cursor = conn.cursor()
+    cursor.execute('select user_name,msg,notify_time from user where chat_id = ? order by notify_time asc', (chat_id,))
+    values = cursor.fetchall()
+    out=''
+    if len(values)>0:
+        out += '-=-=-=-=-=-=-=-=-=-=-=-=-\n'
+        for index, value in enumerate(values):
+            out += 'user : {}\nthing: {}\ntime : {}'.format(value[0], value[1], value[2])
+            if index!=len(values):
+                out += '\n'
+            out += '-=-=-=-=-=-=-=-=-=-=-=-=-\n'
+    else:
+        out = 'Here isn\'t any record in the conversation.'
+    cursor.close()
+    conn.close()
+    bot.sendMessage(chat_id, out)
 
 def on_chat_message(jsons):
     msg  = jsons['text']
@@ -52,6 +75,7 @@ def on_chat_message(jsons):
         '/start':start,
         '/help':get_help,
         '/setNotify':set_notify,
+        '/get':get_info,
     }[msg.split(' ')[0]](jsons)
 
 
