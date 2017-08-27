@@ -2,6 +2,12 @@
 
 > can use this bot to record anything, and the bot will push message to user from the time which you set.
 
+## Updating Diary
+- 2017-08-27
+    > add new command /clear
+- 2017-08-26
+    > add new command /help,/get
+
 ## Use
 1. python  
 2. sqlite3
@@ -9,14 +15,16 @@
 
 ## Command
 ### /start
-> get info from the bot
+> Get info from the bot
 ### /help
-> get command info
+> Get command info
 ### /setNotify time things
 > Time's format:yyyy-MM-dd HH:mm  
 > Example：/setNotify 2017-08-27 12:00 favorite TV show
 ### /get
 > Get all notify message in the conversation
+### /clear
+> Clear the notify message which the user who inserted in the conversation.
 
 ## Table schema
 ```sql
