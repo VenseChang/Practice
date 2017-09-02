@@ -12,15 +12,15 @@
     ▲ 圖 1-1
 
 2. JavaScript 
-    - ### FB.init的地方記得將 <font color="red">{your-app-id}</font>換成自己的appID
-    - ### FB.api
-        - ### locale 可以設定語系
+    -  FB.init的地方記得將 <font color="red">{your-app-id}</font>換成自己的appID
+    -  FB.api
+        -  locale 可以設定語系
             - 英文 : en-US
             - 中文 : zh-hant
-        - ### fields 可填需要回傳什麼資訊，<font color="red">若沒有 fields ，則只會回傳 id 跟 name</font>
+        -  fields 可填需要回傳什麼資訊，<font color="red">若沒有 fields ，則只會回傳 id 跟 name</font>
 
-        - ### 有些資訊需要使用者授權才能取得
-        - ### 有些資訊需要FB先審核過應用後方可使用&取得
+        -  有些資訊需要使用者授權才能取得
+        -  有些資訊需要FB先審核過應用後方可使用&取得
 3. App id
     ![](images/pic02.jpg)
 
