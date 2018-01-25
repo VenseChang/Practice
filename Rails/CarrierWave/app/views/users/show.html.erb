@@ -1,0 +1,33 @@
+<center>
+  <%= image_tag @user.image if @user.image? %><br>
+  <%= @user.name %><br>
+  <% if @user.files? %>
+    <%= link_to  @user.files_identifier, @user.files.to_s, download: @user.files_identifier %>
+  <% end %>
+  <hr>
+  <table>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th></th>
+    </tr>
+    <% @file_records.each do |file| %>
+      <tr>
+        <td></td>
+        <td><%= link_to  file.name, file.file.to_s %></td>
+        <td>
+          <%= link_to "下載", file.file.to_s, download: file.file_identifier %>
+          <%= link_to "編輯", edit_file_path(file) %>
+          <%= link_to "刪除", file_path(file), method: "delete", data:{ confirm: "Are you sure?"} %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <hr>
+  <%= simple_form_for @file_record, url: file_user_path, method: "post" do |f| %>
+    <%= f.text_field :user_id, :value => @user.id, readonly: true, hidden: true %>
+    <%= f.input :file, label: "檔案上傳：" %><br>
+    <%= f.submit %>
+  <% end %>
+  <%= link_to  "back", "/" %>
+</center>

@@ -1,0 +1,24 @@
+<div class="col-xs-12  col-md-12">
+    <h1>User List</h1>
+</div>
+<div class="col-xs-12  col-md-10">
+<table class="table table-hover">
+    <tr>
+      <th>Name(NickName)</th>
+      <th>credit score</th>
+      <th>phone</th>
+      <th>memo</th>
+    </tr>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to  "#{user.name}(#{user.nickname})", user_manage_path(user) %></td>
+        <td><%= user.rating %></td>
+        <td><%= user.phone %></td>
+        <td><%= user.phone_memo %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+<div class="col-xs-12  col-md-2">
+    <%= render  "common/manage_list" %>
+</div>

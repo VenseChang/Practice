@@ -1,0 +1,41 @@
+<section class="row banner  text-center">
+    <h1>產品列表</h1>
+</section>
+<section class="row">
+    <div class="col-xs-12  col-md-3">
+        <div class="list-group">
+            <%= render  "common/product_kind", kinds: all_kinds %>
+        </div>
+    </div>
+    <div class="col-xs-12  col-md-9 productList">
+        <div class="row">
+            <% @products.each do |product| %>
+                <div class="col-sm-6 col-md-4">
+                    <div class="productItems">
+                        <div class="productsImg" style="background-image: url('<%= product.image.url %>');"></div>
+                        <div class="productsContext">
+                            <h4>
+                                <%= link_to (product.name.length <= 12)? product.name : "#{product.name[1..12]}...", product_path(product), data: { turbolinks: false } %>
+                            </h4>
+                            <div class="firstDiv">
+                                <%= (product.description.length <= 12)? product.description : "#{product.description[1..12]}..." %>
+                            </div>
+                            <div>
+                                單價：
+                                <%= product.price %>
+                            </div>
+                            <div>
+                                剩餘數量：
+                                <%= product.amount %>
+                            </div>
+                        </div>
+                        <div class="iconButton">
+                            <%= link_to "<i class='fa fa-search' aria-hidden='true'></i>".html_safe, product_path(product), data: { turbolinks: false }  %>
+                            <%= link_to "<i class='fa fa-shopping-cart' aria-hidden='true'></i>".html_safe, shopping_cart_product_path(product), method: "post" %>
+                        </div>
+                    </div>
+                </div>
+                <% end %>
+        </div>
+    </div>
+</section>
