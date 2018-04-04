@@ -7,7 +7,7 @@ import { NavController, AlertController } from 'ionic-angular';
 })
 export class HomePage {
   name: string = "Tom";
-  msg:  any = "Welcome!\r\nLet's make your own app by ionic!";
+  msg:  string = "Welcome!\r\nLet's make your own app by ionic!";
 
   constructor(
     public navCtrl: NavController,
