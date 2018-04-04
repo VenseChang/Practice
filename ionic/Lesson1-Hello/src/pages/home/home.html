@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Hello World!
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Name</ion-label>
+      <ion-input type="text" placeholder="Name" [(ngModel)]="name"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label floating>Message</ion-label>
+      <ion-textarea type="text" [(ngModel)]="msg"></ion-textarea>
+    </ion-item>
+  </ion-list>
+  <button ion-button block (click)="showAlert()">Show</button>
+</ion-content>
+
+
