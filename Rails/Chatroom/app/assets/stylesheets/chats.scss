@@ -1,0 +1,68 @@
+// Place all the styles related to the chats controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.login-block {
+  margin: 200px auto;
+  padding: 100px;
+  border: 1px solid black;
+  max-width: 800px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px 0 #555;
+
+  h1 {
+    margin-bottom: 50px;
+  }
+
+  input {
+    border: 0;
+    border-bottom: 2px black solid;
+    text-align: center;
+    font-size: 24px;
+  }
+}
+
+ul.pages {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+
+  .chatArea {
+    height: 100%;
+    padding-bottom: 60px;
+
+    .messages {
+      height: 100%;
+      margin: 0;
+      overflow-y: scroll;
+      padding: 10px 20px 10px 20px;
+      font-size: 150%;
+
+      .log {
+        color: gray;
+        font-size: 70%;
+        margin: 5px;
+        text-align: center;
+      }
+    }
+  }
+
+  .inputMessage {
+    border: 10px solid #000;
+    bottom: 0;
+    height: 60px;
+    left: 0;
+    outline: none;
+    padding-left: 10px;
+    right: 0;
+    width: 100%;
+    font-size: 100%;
+  }
+}
+
+ul {
+	list-style: none;
+	word-wrap: break-word;
+}
